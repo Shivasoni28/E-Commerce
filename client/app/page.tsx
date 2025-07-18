@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import {useSearchContext} from "../app/context/searchContext";
 
 interface Product {
   _id: string;
@@ -17,8 +18,7 @@ interface Product {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [search, setSearch] = useState<string>("");
-  const [category, setCategory] = useState<string>("All");
+  const { search,  category} = useSearchContext();
 
   const categories = [
     "All",
@@ -57,28 +57,6 @@ export default function Home() {
   return (
     <main className="p-6 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center">🛍️ Product List</h1>
-
-      {/* Filter Section */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8 justify-center items-center">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 p-2 rounded w-full md:w-1/3"
-        />
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="p-2 border border-gray-300 rounded w-full md:w-1/4"
-        >
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-      </div>
 
       {/* Product Grid */}
       {loading ? (

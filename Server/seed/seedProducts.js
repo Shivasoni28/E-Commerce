@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const connectDB = require("../config/db");
 const Product = require("../models/productModel");
-const { faker } = require("@faker-js/faker");
 const axios = require("axios");
 
 dotenv.config();
