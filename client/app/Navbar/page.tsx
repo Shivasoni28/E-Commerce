@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { Search, Package, User, ShoppingCart } from "lucide-react";
 import { useSearchContext } from "../context/searchContext";
 import Link from "next/link";
+import { useCart } from "../context/cartContext";
 
 const Navbar = () => {
   const { search, setSearch, category, setCategory } = useSearchContext();
   const [clicked, setClicked] = useState(false);
+  const { cart } = useCart();
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const categories = [
     "All",
@@ -28,7 +31,7 @@ const Navbar = () => {
 
         {/* Nav Links */}
         <ul className="hidden md:flex items-center font-semibold gap-6">
-          <li className="hover:text-blue-500 cursor-pointer">Shop</li>
+          <Link href="/"><li className="hover:text-blue-500 cursor-pointer">Shop</li></Link>
           <li className="hover:text-blue-500 cursor-pointer">Categories</li>
           <li className="hover:text-blue-500 cursor-pointer">Deals</li>
           <li className="hover:text-blue-500 cursor-pointer">About</li>
@@ -67,7 +70,14 @@ const Navbar = () => {
 
           {/* Icons */}
           <div className="flex items-center gap-4 relative">
-            <ShoppingCart className="h-6 w-6 text-gray-700 cursor-pointer hover:text-blue-500" />
+             <Link href="/cart" className="relative">
+        <ShoppingCart className="h-6 w-6 text-gray-700 hover:text-blue-500" />
+        {totalItems > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+            {totalItems}
+          </span>
+        )}
+      </Link>
             <User
               className="h-6 w-6 text-gray-700 cursor-pointer hover:text-blue-500"
               onClick={() => setClicked(!clicked)}
@@ -81,7 +91,7 @@ const Navbar = () => {
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Orders</li>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
                   <li className="px-4 py-2 hover:bg-gray-100">
-                    <Link href="/login" className="block w-full">
+                    <Link href="/register" className="block w-full">
                       Sign In
                     </Link>
                   </li>

@@ -60,6 +60,9 @@ const RegisterPage = () => {
         email: loginEmail,
         password: loginPassword,
       });
+      localStorage.setItem("token", response.data.token);
+      const token = localStorage.getItem("token");
+      console.log("JWT Token:", token);
       console.log("Login successful:", response.data);
       alert(response.data);
     } catch (error: any) {

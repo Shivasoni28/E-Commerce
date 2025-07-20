@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import { useCart} from "../../context/cartContext";
 
 interface Product {
   _id: string;
@@ -20,6 +21,7 @@ export default function ProductDetail() {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -82,9 +84,20 @@ export default function ProductDetail() {
           </p>
 
           {/* Add to Cart Button */}
-          <button className="w-full md:w-1/2 bg-blue-600 text-white text-lg px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300">
-            Add to Cart
-          </button>
+          <button
+      onClick={() =>
+        addToCart({
+          id: product._id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          quantity: 1,
+        })
+      }
+      className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    >
+      Add to Cart
+    </button>
         </div>
       </div>
     </div>

@@ -5,12 +5,17 @@ const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 const userRoutes = require('./routes/userRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -21,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users',userRoutes);
+app.use('/api/cart', cartRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
