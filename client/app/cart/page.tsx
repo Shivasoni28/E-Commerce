@@ -1,10 +1,34 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "../context/cartContext";
 import Link from "next/link";
 
 export default function CartPage() {
-  const { cart, fetchCart, removeFromCart, updateQuantity, totalPrice, clearCart } = useCart();
+  const {
+    cart,
+    fetchCart,
+    removeFromCart,
+    updateQuantity,
+    totalPrice,
+    clearCart,
+    placeOrder,
+  } = useCart();
+
+  const [address, setAddress] = useState("");
+
+  const handlePlaceOrder = async () => {
+    if (!address.trim()) return alert("Please enter a shipping address");
+
+    try {
+      const order = await placeOrder(address, "cod");
+      alert("Order placed successfully!");
+      console.log("Order:", order);
+      await fetchCart(); // Refresh cart (should be empty now)
+    } catch (error) {
+      console.error(error);
+      alert("Failed to place order");
+    }
+  };
 
   useEffect(() => {
     fetchCart();
@@ -27,16 +51,12 @@ export default function CartPage() {
 
       {/* Cart Items */}
       <div className="flex flex-col gap-4">
-        {cart.map((item,index) => {
-           if (!item.product) return null;
-         const key = item._id || `${item.product._id}-${index}`;
-          
+        {cart.map((item, index) => {
+          if (!item.product) return null;
+          const key = item._id || `${item.product._id}-${index}`;
 
           return (
-            <div
-              key={key}
-              className="flex items-center gap-4 border-b pb-4"
-            >
+            <div key={key} className="flex items-center gap-4 border-b pb-4">
               <img
                 src={item.product.image}
                 alt={item.product.name}
@@ -47,21 +67,27 @@ export default function CartPage() {
                 <p className="text-gray-600">₹{item.product.price}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button
-                    onClick={() => updateQuantity(item.product._id, "decrement")}
+                    onClick={() =>
+                      updateQuantity(item.product._id, "decrement")
+                    }
                     className="px-2 py-1 border rounded hover:bg-gray-100"
                   >
                     -
                   </button>
                   <span className="px-3">{item.quantity}</span>
                   <button
-                    onClick={() => updateQuantity(item.product._id, "increment")}
+                    onClick={() =>
+                      updateQuantity(item.product._id, "increment")
+                    }
                     className="px-2 py-1 border rounded hover:bg-gray-100"
                   >
                     +
                   </button>
                 </div>
               </div>
-              <p className="font-bold">₹{item.product.price * item.quantity}</p>
+              <p className="font-bold">
+                ₹{item.product.price * item.quantity}
+              </p>
               <button
                 onClick={() => removeFromCart(item.product._id)}
                 className="ml-4 text-red-500 hover:underline"
@@ -71,6 +97,20 @@ export default function CartPage() {
             </div>
           );
         })}
+      </div>
+
+      {/* Shipping Address */}
+      <div className="mt-6">
+        <label className="block text-lg font-semibold mb-2">
+          Shipping Address
+        </label>
+        <textarea
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Enter your shipping address"
+          className="w-full p-3 border rounded focus:outline-none focus:ring"
+          rows={3}
+        />
       </div>
 
       {/* Total & Actions */}
@@ -85,11 +125,22 @@ export default function CartPage() {
           >
             Clear Cart
           </button>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Proceed to Checkout
+          <button
+            onClick={handlePlaceOrder}
+            className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          >
+            Place Order (COD)
           </button>
+          {/* View Orders Button */}
+          <Link
+            href="/orders"
+            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            View Orders
+          </Link>
         </div>
       </div>
     </div>
   );
 }
+

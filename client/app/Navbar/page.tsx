@@ -88,7 +88,7 @@ const Navbar = () => {
               <div className="absolute right-0 top-12 bg-white border border-gray-200 shadow-xl rounded-lg mt-2 w-40 z-50">
                 <ul>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Orders</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"><Link href="/orders" className="block w-full">Orders</Link></li>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
                   <li className="px-4 py-2 hover:bg-gray-100">
                     <Link href="/register" className="block w-full">

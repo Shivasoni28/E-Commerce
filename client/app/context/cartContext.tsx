@@ -29,6 +29,7 @@ interface CartContextType {
   removeFromCart: (id: string) => Promise<void>;
   clearCart: () => Promise<void>;
   totalPrice: number;
+  placeOrder: (shippingAddress: string, paymentMethod?: "cod" | "online") => Promise<any>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -96,6 +97,22 @@ const clearCart = async () => {
       )
     );
   };
+  const placeOrder = async (shippingAddress: string, paymentMethod: "cod" | "online" = "cod") => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/orders",
+      { shippingAddress, paymentMethod },
+      { withCredentials: true }
+    );
+
+    // Clear cart after order
+    setCart([]);
+    return data;
+  } catch (error: any) {
+    console.error("Failed to place order:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
   useEffect(() => {
     fetchCart();
@@ -116,6 +133,7 @@ const clearCart = async () => {
         updateQuantity,
         clearCart,
         totalPrice,
+         placeOrder, 
       }}
     >
       {children}
