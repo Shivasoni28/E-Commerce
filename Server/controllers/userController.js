@@ -54,8 +54,12 @@ const getUserProfile = async (req,res)=>{
     const user = await User.findById(id).select('-password');
     res.status(200).json(user);
 };
+const logoutUser = (req, res) => {
+  return res.status(200).json({ message: "Logged out successfully" });
+};
 module.exports = {
     registerUser,
     loginUser,
+    logoutUser,
     getUserProfile
 };

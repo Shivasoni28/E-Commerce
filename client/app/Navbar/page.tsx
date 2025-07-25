@@ -11,6 +11,13 @@ const Navbar = () => {
   const { cart } = useCart();
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+    const handleLogout = () => {
+  localStorage.removeItem("token");  // Clear JWT
+  alert("Logged out successfully!");
+  window.location.href = "/register";  // Redirect to login
+};
+
+
   const categories = [
     "All",
     "Footwear",
@@ -89,7 +96,7 @@ const Navbar = () => {
                 <ul>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Profile</li>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer"><Link href="/orders" className="block w-full">Orders</Link></li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Logout</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>Logout</li>
                   <li className="px-4 py-2 hover:bg-gray-100">
                     <Link href="/register" className="block w-full">
                       Sign In

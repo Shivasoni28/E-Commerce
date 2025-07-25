@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useCart } from "../context/cartContext";
+import axiosInstance from "../utils/axiosInstance";
 import Link from "next/link";
 
 export default function CartPage() {
@@ -15,18 +16,33 @@ export default function CartPage() {
   } = useCart();
 
   const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "stripe">("cod");
 
   const handlePlaceOrder = async () => {
     if (!address.trim()) return alert("Please enter a shipping address");
 
-    try {
-      const order = await placeOrder(address, "cod");
-      alert("Order placed successfully!");
-      console.log("Order:", order);
-      await fetchCart(); // Refresh cart (should be empty now)
-    } catch (error) {
-      console.error(error);
-      alert("Failed to place order");
+    if (paymentMethod === "cod") {
+      try {
+        const order = await placeOrder(address, "cod");
+        alert("Order placed successfully (COD)!");
+        await fetchCart();
+      } catch (error) {
+        console.error(error);
+        alert("Failed to place order");
+      }
+    } else {
+      // Stripe Checkout Flow
+      try {
+        const { data } = await axiosInstance.post(
+          "/orders/checkout",
+          {},
+          { withCredentials: true }
+        );
+        window.location.href = data.url; // Redirect to Stripe Checkout
+      } catch (error) {
+        console.error(error);
+        alert("Failed to start Stripe payment");
+      }
     }
   };
 
@@ -38,9 +54,12 @@ export default function CartPage() {
     return (
       <div className="p-6 text-center">
         <h2 className="text-2xl font-bold mb-4">Your Cart is Empty</h2>
+        <div className="flex items-center justify-center gap-4">
         <Link href="/" className="text-blue-600 underline hover:text-blue-800">
           Go Back to Shop
         </Link>
+        <Link href="/orders" className="text-blue-600 underline hover:text-blue-800">View Orders</Link>
+        </div>
       </div>
     );
   }
@@ -67,27 +86,21 @@ export default function CartPage() {
                 <p className="text-gray-600">₹{item.product.price}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <button
-                    onClick={() =>
-                      updateQuantity(item.product._id, "decrement")
-                    }
+                    onClick={() => updateQuantity(item.product._id, "decrement")}
                     className="px-2 py-1 border rounded hover:bg-gray-100"
                   >
                     -
                   </button>
                   <span className="px-3">{item.quantity}</span>
                   <button
-                    onClick={() =>
-                      updateQuantity(item.product._id, "increment")
-                    }
+                    onClick={() => updateQuantity(item.product._id, "increment")}
                     className="px-2 py-1 border rounded hover:bg-gray-100"
                   >
                     +
                   </button>
                 </div>
               </div>
-              <p className="font-bold">
-                ₹{item.product.price * item.quantity}
-              </p>
+              <p className="font-bold">₹{item.product.price * item.quantity}</p>
               <button
                 onClick={() => removeFromCart(item.product._id)}
                 className="ml-4 text-red-500 hover:underline"
@@ -101,9 +114,7 @@ export default function CartPage() {
 
       {/* Shipping Address */}
       <div className="mt-6">
-        <label className="block text-lg font-semibold mb-2">
-          Shipping Address
-        </label>
+        <label className="block text-lg font-semibold mb-2">Shipping Address</label>
         <textarea
           value={address}
           onChange={(e) => setAddress(e.target.value)}
@@ -111,6 +122,19 @@ export default function CartPage() {
           className="w-full p-3 border rounded focus:outline-none focus:ring"
           rows={3}
         />
+      </div>
+
+      {/* Payment Selection */}
+      <div className="mt-4">
+        <label className="block text-lg font-semibold mb-2">Payment Method</label>
+        <select
+          value={paymentMethod}
+          onChange={(e) => setPaymentMethod(e.target.value as "cod" | "stripe")}
+          className="w-full p-3 border rounded focus:outline-none"
+        >
+          <option value="cod">Cash on Delivery</option>
+          <option value="stripe">Pay with Card (Stripe)</option>
+        </select>
       </div>
 
       {/* Total & Actions */}
@@ -129,15 +153,8 @@ export default function CartPage() {
             onClick={handlePlaceOrder}
             className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
           >
-            Place Order (COD)
+            Place Order
           </button>
-          {/* View Orders Button */}
-          <Link
-            href="/orders"
-            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            View Orders
-          </Link>
         </div>
       </div>
     </div>

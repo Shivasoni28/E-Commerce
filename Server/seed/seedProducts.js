@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const connectDB = require("../config/db");
 const Product = require("../models/productModel");
-const axios = require("axios");
+// const axios = require("axios");
+const data=require("../products/data");
 
 dotenv.config();
 connectDB();
@@ -12,7 +13,7 @@ connectDB();
 const seedProducts = async () => {
   try {
     await Product.deleteMany();
-    const { data } = await axios.get("https://fakestoreapi.com/products");
+    // const { data } = await axios.get("https://fakestoreapi.com/products");
 
      const fakeProducts = data.map((item) => ({
       name: item.title,
