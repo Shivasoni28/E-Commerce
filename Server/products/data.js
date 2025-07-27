@@ -1,11 +1,11 @@
 const data =[
-  {
+ {
     "id": 1,
     "title": "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
     "price": 50.0,
     "description": "Trendy peplum hem blouse with striped flutter sleeves. Perfect for casual and party wear.",
     "category": "women's clothing",
-    "image": "product_1.png",
+    "image": "/images/product_1.png",
     "rating": { "rate": 4.1, "count": 120 }
   },
   {
@@ -14,7 +14,7 @@ const data =[
     "price": 85.0,
     "description": "Stylish overlap collar blouse with flutter sleeves, ideal for evening outings.",
     "category": "women's clothing",
-    "image": "product_2.png",
+    "image": "/images/product_2.png",
     "rating": { "rate": 4.5, "count": 90 }
   },
   {
@@ -23,7 +23,7 @@ const data =[
     "price": 60.0,
     "description": "Casual yet elegant striped blouse designed for comfort and style.",
     "category": "women's clothing",
-    "image": "product_3.png",
+    "image": "/images/product_3.png",
     "rating": { "rate": 4.0, "count": 75 }
   },
   {
@@ -32,7 +32,7 @@ const data =[
     "price": 100.0,
     "description": "Premium fabric blouse with trendy flutter sleeves and a peplum fit.",
     "category": "women's clothing",
-    "image": "product_4.png",
+    "image": "/images/product_4.png",
     "rating": { "rate": 4.6, "count": 150 }
   },
   {
@@ -41,7 +41,7 @@ const data =[
     "price": 85.0,
     "description": "Comfortable and stylish blouse for both work and casual wear.",
     "category": "women's clothing",
-    "image": "product_5.png",
+    "image": "/images/product_5.png",
     "rating": { "rate": 4.3, "count": 95 }
   },
   {
@@ -50,7 +50,7 @@ const data =[
     "price": 85.0,
     "description": "A versatile addition to your wardrobe, great for all seasons.",
     "category": "women's clothing",
-    "image": "product_6.png",
+    "image": "/images/product_6.png",
     "rating": { "rate": 4.0, "count": 60 }
   },
   {
@@ -59,7 +59,7 @@ const data =[
     "price": 85.0,
     "description": "Lightweight, breathable fabric for comfortable everyday wear.",
     "category": "women's clothing",
-    "image": "product_7.png",
+    "image": "/images/product_7.png",
     "rating": { "rate": 3.8, "count": 50 }
   },
   {
@@ -68,7 +68,7 @@ const data =[
     "price": 85.0,
     "description": "Elegant flutter sleeve design with soft touch fabric.",
     "category": "women's clothing",
-    "image": "product_8.png",
+    "image": "/images/product_8.png",
     "rating": { "rate": 4.4, "count": 110 }
   },
   {
@@ -77,7 +77,7 @@ const data =[
     "price": 85.0,
     "description": "Trendy, casual, and easy to pair with jeans or skirts.",
     "category": "women's clothing",
-    "image": "product_9.png",
+    "image": "/images/product_9.png",
     "rating": { "rate": 4.2, "count": 80 }
   },
   {
@@ -86,7 +86,7 @@ const data =[
     "price": 85.0,
     "description": "Classic design for versatile wardrobe styling.",
     "category": "women's clothing",
-    "image": "product_10.png",
+    "image": "/images/product_10.png",
     "rating": { "rate": 4.1, "count": 70 }
   },
   {
@@ -95,7 +95,7 @@ const data =[
     "price": 85.0,
     "description": "Stylish, breathable blouse perfect for work or casual meetups.",
     "category": "women's clothing",
-    "image": "product_11.png",
+    "image": "/images/product_11.png",
     "rating": { "rate": 4.0, "count": 50 }
   },
   {
@@ -104,7 +104,7 @@ const data =[
     "price": 85.0,
     "description": "Light and comfortable blouse for a chic, effortless look.",
     "category": "women's clothing",
-    "image": "product_12.png",
+    "image": "/images/product_12.png",
     "rating": { "rate": 4.3, "count": 80 }
   },
   {
@@ -113,7 +113,7 @@ const data =[
     "price": 85.0,
     "description": "Slim fit bomber jacket, perfect for casual outings and winter layering.",
     "category": "men's clothing",
-    "image": "product_13.png",
+    "image": "/images/product_13.png",
     "rating": { "rate": 4.6, "count": 200 }
   },
   {
@@ -122,7 +122,7 @@ const data =[
     "price": 85.0,
     "description": "Comfortable bomber jacket with stylish zippered details for all-day wear.",
     "category": "men's clothing",
-    "image": "product_14.png",
+    "image": "/images/product_14.png",
     "rating": { "rate": 4.4, "count": 180 }
   },
   {
@@ -131,7 +131,7 @@ const data =[
     "price": 85.0,
     "description": "Durable and fashionable bomber jacket for men, ideal for autumn.",
     "category": "men's clothing",
-    "image": "product_15.png",
+    "image": "/images/product_15.png",
     "rating": { "rate": 4.5, "count": 150 }
   },
   {
@@ -140,7 +140,7 @@ const data =[
     "price": 85.0,
     "description": "Classic bomber jacket with a soft lining and premium finish.",
     "category": "men's clothing",
-    "image": "product_16.png",
+    "image": "/images/product_16.png",
     "rating": { "rate": 4.2, "count": 120 }
   },
   {
@@ -149,7 +149,7 @@ const data =[
     "price": 85.0,
     "description": "All-weather slim fit bomber for versatile styling options.",
     "category": "men's clothing",
-    "image": "product_17.png",
+    "image": "/images/product_17.png",
     "rating": { "rate": 4.3, "count": 140 }
   },
   {
@@ -158,7 +158,7 @@ const data =[
     "price": 85.0,
     "description": "Stylish bomber jacket designed for both function and flair.",
     "category": "men's clothing",
-    "image": "product_18.png",
+    "image": "/images/product_18.png",
     "rating": { "rate": 4.1, "count": 130 }
   },
   {
@@ -167,7 +167,7 @@ const data =[
     "price": 85.0,
     "description": "Lightweight yet warm bomber for urban and casual looks.",
     "category": "men's clothing",
-    "image": "product_19.png",
+    "image": "/images/product_19.png",
     "rating": { "rate": 4.0, "count": 115 }
   },
   {
@@ -176,7 +176,7 @@ const data =[
     "price": 85.0,
     "description": "Minimalist design bomber jacket with a slim cut and durability.",
     "category": "men's clothing",
-    "image": "product_20.png",
+    "image": "/images/product_20.png",
     "rating": { "rate": 4.5, "count": 190 }
   },
   {
@@ -185,7 +185,7 @@ const data =[
     "price": 85.0,
     "description": "Warm and stylish hoodie designed for kids’ comfort and durability.",
     "category": "kids' clothing",
-    "image": "product_25.png",
+    "image": "/images/product_25.png",
     "rating": { "rate": 4.0, "count": 180 }
   },
   {
@@ -194,10 +194,10 @@ const data =[
     "price": 85.0,
     "description": "Soft cotton hoodie with bright colorblocking for a sporty look.",
     "category": "kids' clothing",
-    "image": "product_36.png",
+    "image": "/images/product_36.png",
     "rating": { "rate": 4.3, "count": 150 }
-  }
-  ,
+  },
+  
   {
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
